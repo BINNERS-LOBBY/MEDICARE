@@ -11,14 +11,6 @@ export interface Appointment {
   type: "in-person" | "telemedicine";
 }
 
-interface AppointmentStore {
-  appointments: Appointment[];
-  addAppointment: (appt: Appointment) => void;
-  cancelAppointment: (id: string) => void;
-}
-
-// We'll use a simple React context-based store instead of zustand
-// to avoid adding dependencies
 let _appointments: Appointment[] = [
   {
     id: "a1",
