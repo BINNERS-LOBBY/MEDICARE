@@ -1,5 +1,3 @@
-import { create } from "zustand";
-
 export interface Appointment {
   id: string;
   patientId: string;
