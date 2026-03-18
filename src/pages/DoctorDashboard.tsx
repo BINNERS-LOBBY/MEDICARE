@@ -1,6 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useAppointments } from "@/hooks/useAppointments";
 import { AppHeader } from "@/components/AppHeader";
+import { AnimatedCard } from "@/components/AnimatedCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,7 @@ export default function DoctorDashboard() {
     <div className="min-h-screen bg-background">
       <AppHeader />
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-        <div className="mb-8">
+        <div className="mb-8 animate-fade-in">
           <h1 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
             Good morning, {user?.name} 🩺
           </h1>
@@ -31,90 +32,77 @@ export default function DoctorDashboard() {
 
         {/* Stats */}
         <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <Card className="shadow-card">
-            <CardContent className="flex items-center gap-4 p-5">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                <Users className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">{today.length}</p>
-                <p className="text-sm text-muted-foreground">Today's Patients</p>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="shadow-card">
-            <CardContent className="flex items-center gap-4 p-5">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-success/10">
-                <CheckCircle className="h-6 w-6 text-success" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">{completed.length}</p>
-                <p className="text-sm text-muted-foreground">Completed</p>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="shadow-card">
-            <CardContent className="flex items-center gap-4 p-5">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
-                <Video className="h-6 w-6 text-accent" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">
-                  {today.filter((a) => a.type === "telemedicine").length}
-                </p>
-                <p className="text-sm text-muted-foreground">Video Calls</p>
-              </div>
-            </CardContent>
-          </Card>
+          {[
+            { icon: Users, value: today.length, label: "Today's Patients", color: "bg-primary/10 text-primary", delay: 0 },
+            { icon: CheckCircle, value: completed.length, label: "Completed", color: "bg-success/10 text-success", delay: 80 },
+            { icon: Video, value: today.filter((a) => a.type === "telemedicine").length, label: "Video Calls", color: "bg-accent/10 text-accent", delay: 160 },
+          ].map((stat) => (
+            <AnimatedCard key={stat.label} delay={stat.delay}>
+              <Card className="shadow-card">
+                <CardContent className="flex items-center gap-4 p-5">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${stat.color.split(" ")[0]}`}>
+                    <stat.icon className={`h-6 w-6 ${stat.color.split(" ")[1]}`} />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                    <p className="text-sm text-muted-foreground">{stat.label}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </AnimatedCard>
+          ))}
         </div>
 
         {/* Appointment list */}
-        <Card className="shadow-card">
-          <CardHeader>
-            <CardTitle className="font-display text-lg">Upcoming Appointments</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {today.length === 0 ? (
-              <div className="py-8 text-center">
-                <CalendarDays className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
-                <p className="text-muted-foreground">No upcoming appointments</p>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {today.map((appt) => (
-                  <div
-                    key={appt.id}
-                    className="flex flex-col gap-3 rounded-xl border bg-card p-4 transition-shadow hover:shadow-card-hover sm:flex-row sm:items-center sm:justify-between"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary font-semibold text-secondary-foreground text-sm">
-                        {appt.patientName.split(" ").map((n) => n[0]).join("").slice(0, 2)}
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">{appt.patientName}</p>
-                        <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-                          <span className="flex items-center gap-1"><CalendarDays className="h-3.5 w-3.5" /> {appt.date}</span>
-                          <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {appt.time}</span>
+        <AnimatedCard delay={250} hover={false}>
+          <Card className="shadow-card">
+            <CardHeader>
+              <CardTitle className="font-display text-lg">Upcoming Appointments</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {today.length === 0 ? (
+                <div className="py-8 text-center animate-fade-in">
+                  <CalendarDays className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
+                  <p className="text-muted-foreground">No upcoming appointments</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {today.map((appt, i) => (
+                    <div
+                      key={appt.id}
+                      className="flex flex-col gap-3 rounded-xl border bg-card p-4 transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5 sm:flex-row sm:items-center sm:justify-between animate-stagger-fade"
+                      style={{ animationDelay: `${350 + i * 80}ms`, animationFillMode: "both" }}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary font-semibold text-secondary-foreground text-sm transition-transform duration-200 hover:scale-110">
+                          {appt.patientName.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                        </div>
+                        <div>
+                          <p className="font-medium text-foreground">{appt.patientName}</p>
+                          <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                            <span className="flex items-center gap-1"><CalendarDays className="h-3.5 w-3.5" /> {appt.date}</span>
+                            <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {appt.time}</span>
+                          </div>
                         </div>
                       </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant={appt.type === "telemedicine" ? "default" : "secondary"} className="gap-1 text-xs">
+                          {appt.type === "telemedicine" ? <Video className="h-3 w-3" /> : <MapPin className="h-3 w-3" />}
+                          {appt.type === "telemedicine" ? "Video" : "In-Person"}
+                        </Badge>
+                        {appt.type === "telemedicine" && (
+                          <Button size="sm" variant="outline" className="gap-1 hover-scale" onClick={() => navigate("/video-call")}>
+                            <Video className="h-3.5 w-3.5" /> Start Call
+                          </Button>
+                        )}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant={appt.type === "telemedicine" ? "default" : "secondary"} className="gap-1 text-xs">
-                        {appt.type === "telemedicine" ? <Video className="h-3 w-3" /> : <MapPin className="h-3 w-3" />}
-                        {appt.type === "telemedicine" ? "Video" : "In-Person"}
-                      </Badge>
-                      {appt.type === "telemedicine" && (
-                        <Button size="sm" variant="outline" className="gap-1" onClick={() => navigate("/video-call")}>
-                          <Video className="h-3.5 w-3.5" /> Start Call
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </AnimatedCard>
       </main>
     </div>
   );
