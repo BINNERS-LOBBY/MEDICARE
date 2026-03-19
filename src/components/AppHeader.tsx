@@ -37,6 +37,9 @@ export function AppHeader() {
               <Button variant="ghost" size="sm" onClick={() => navigate("/doctors")}>
                 Find Doctors
               </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate("/health-records")}>
+                Health Records
+              </Button>
             </>
           )}
           {user?.role === "doctor" && (
