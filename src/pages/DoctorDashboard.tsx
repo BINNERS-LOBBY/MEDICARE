@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { CalendarDays, Clock, Users, Video, MapPin, CheckCircle } from "lucide-react";
+import { CalendarDays, Clock, Users, Video, MapPin, CheckCircle, FileText } from "lucide-react";
 
 export default function DoctorDashboard() {
   const { user } = useAuth();
