@@ -60,6 +60,9 @@ export default function PatientDashboard() {
           <Button onClick={() => navigate("/doctors")} className="gap-2 hover-scale">
             <Search className="h-4 w-4" /> Find a Doctor
           </Button>
+          <Button variant="outline" onClick={() => navigate("/health-records")} className="gap-2 hover-scale">
+            <FileText className="h-4 w-4" /> Health Records
+          </Button>
         </div>
 
         {/* Upcoming appointments */}

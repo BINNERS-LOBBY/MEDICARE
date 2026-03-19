@@ -87,9 +87,14 @@ export function AppHeader() {
               </>
             )}
             {user?.role === "doctor" && (
-              <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/doctor-dashboard"); setMobileMenuOpen(false); }}>
-                Dashboard
-              </Button>
+              <>
+                <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/doctor-dashboard"); setMobileMenuOpen(false); }}>
+                  Dashboard
+                </Button>
+                <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/patient-records"); setMobileMenuOpen(false); }}>
+                  Patient Records
+                </Button>
+              </>
             )}
             <Button variant="ghost" size="sm" className="justify-start text-destructive" onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" /> Logout

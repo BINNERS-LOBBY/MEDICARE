@@ -44,6 +44,8 @@ function AppRoutes() {
       <Route path="/book/:doctorId" element={<ProtectedRoute><BookAppointmentPage /></ProtectedRoute>} />
       <Route path="/appointment-confirmed" element={<ProtectedRoute><AppointmentConfirmedPage /></ProtectedRoute>} />
       <Route path="/video-call" element={<ProtectedRoute><VideoCallPage /></ProtectedRoute>} />
+      <Route path="/health-records" element={<ProtectedRoute><HealthRecordsPage /></ProtectedRoute>} />
+      <Route path="/patient-records" element={<ProtectedRoute><PatientRecordsViewPage /></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

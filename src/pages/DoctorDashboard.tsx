@@ -53,6 +53,13 @@ export default function DoctorDashboard() {
           ))}
         </div>
 
+        {/* Quick action */}
+        <div className="mb-8 animate-fade-in" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
+          <Button variant="outline" onClick={() => navigate("/patient-records")} className="gap-2 hover-scale">
+            <FileText className="h-4 w-4" /> View Patient Records
+          </Button>
+        </div>
+
         {/* Appointment list */}
         <AnimatedCard delay={250} hover={false}>
           <Card className="shadow-card">
