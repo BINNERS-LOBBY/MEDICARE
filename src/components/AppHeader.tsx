@@ -43,9 +43,14 @@ export function AppHeader() {
             </>
           )}
           {user?.role === "doctor" && (
-            <Button variant="ghost" size="sm" onClick={() => navigate("/doctor-dashboard")}>
-              Dashboard
-            </Button>
+            <>
+              <Button variant="ghost" size="sm" onClick={() => navigate("/doctor-dashboard")}>
+                Dashboard
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate("/patient-records")}>
+                Patient Records
+              </Button>
+            </>
           )}
           <div className="ml-2 flex items-center gap-3 border-l pl-4">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
