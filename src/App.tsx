@@ -11,6 +11,8 @@ import DoctorListPage from "./pages/DoctorListPage";
 import BookAppointmentPage from "./pages/BookAppointmentPage";
 import AppointmentConfirmedPage from "./pages/AppointmentConfirmedPage";
 import VideoCallPage from "./pages/VideoCallPage";
+import HealthRecordsPage from "./pages/HealthRecordsPage";
+import PatientRecordsViewPage from "./pages/PatientRecordsViewPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
