@@ -37,12 +37,20 @@ export function AppHeader() {
               <Button variant="ghost" size="sm" onClick={() => navigate("/doctors")}>
                 Find Doctors
               </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate("/health-records")}>
+                Health Records
+              </Button>
             </>
           )}
           {user?.role === "doctor" && (
-            <Button variant="ghost" size="sm" onClick={() => navigate("/doctor-dashboard")}>
-              Dashboard
-            </Button>
+            <>
+              <Button variant="ghost" size="sm" onClick={() => navigate("/doctor-dashboard")}>
+                Dashboard
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate("/patient-records")}>
+                Patient Records
+              </Button>
+            </>
           )}
           <div className="ml-2 flex items-center gap-3 border-l pl-4">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
@@ -73,12 +81,20 @@ export function AppHeader() {
                 <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/doctors"); setMobileMenuOpen(false); }}>
                   Find Doctors
                 </Button>
+                <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/health-records"); setMobileMenuOpen(false); }}>
+                  Health Records
+                </Button>
               </>
             )}
             {user?.role === "doctor" && (
-              <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/doctor-dashboard"); setMobileMenuOpen(false); }}>
-                Dashboard
-              </Button>
+              <>
+                <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/doctor-dashboard"); setMobileMenuOpen(false); }}>
+                  Dashboard
+                </Button>
+                <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/patient-records"); setMobileMenuOpen(false); }}>
+                  Patient Records
+                </Button>
+              </>
             )}
             <Button variant="ghost" size="sm" className="justify-start text-destructive" onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" /> Logout

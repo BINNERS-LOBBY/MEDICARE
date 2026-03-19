@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { CalendarDays, Clock, Users, Video, MapPin, CheckCircle } from "lucide-react";
+import { CalendarDays, Clock, Users, Video, MapPin, CheckCircle, FileText } from "lucide-react";
 
 export default function DoctorDashboard() {
   const { user } = useAuth();
@@ -51,6 +51,13 @@ export default function DoctorDashboard() {
               </Card>
             </AnimatedCard>
           ))}
+        </div>
+
+        {/* Quick action */}
+        <div className="mb-8 animate-fade-in" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
+          <Button variant="outline" onClick={() => navigate("/patient-records")} className="gap-2 hover-scale">
+            <FileText className="h-4 w-4" /> View Patient Records
+          </Button>
         </div>
 
         {/* Appointment list */}
