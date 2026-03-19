@@ -81,6 +81,9 @@ export function AppHeader() {
                 <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/doctors"); setMobileMenuOpen(false); }}>
                   Find Doctors
                 </Button>
+                <Button variant="ghost" size="sm" className="justify-start" onClick={() => { navigate("/health-records"); setMobileMenuOpen(false); }}>
+                  Health Records
+                </Button>
               </>
             )}
             {user?.role === "doctor" && (
